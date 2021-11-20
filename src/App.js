@@ -7,11 +7,12 @@ import './App.css';
 import HomePage from './pages/homePage/homePage';
 import HatsPage from './pages/hatsPage/hatsPage';
 import ShopPage from './pages/shopPage/shopPage';
-
+import Header from './components/header/header';
 
 function App() {
   return (
     <div>
+      <Header/>
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route
