@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import './menuItem.scss';
 
 function MenuItem({ title, imageUrl, size }) {
@@ -14,9 +14,10 @@ function MenuItem({ title, imageUrl, size }) {
             />
             <div className='content'>
                 <h1 className='title'>{title.toUpperCase()}</h1>
-                <span className='subtitle' onClick={() => navigate("hats")}>SHOP NOW</span>
+                {/*<Link to='/hats' params={{ prevpath: window.location.pathname }} >Deneme</Link>*/}
+                <span className='subtitle' onClick={() => navigate("hats", { state: "state çalıştı" })}>SHOP NOW</span>
             </div>
-        </div>
+        </div >
     )
 }
 

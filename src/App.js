@@ -5,18 +5,19 @@ import {
 } from "react-router-dom";
 import './App.css';
 import HomePage from './pages/homePage/homePage';
+import HatsPage from './pages/hatsPage/hatsPage';
 
-function HatsPage(props) {
-  console.log(props)
-  return <h1>Hat Page</h1>
-}
 
 function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/hats" element={<HatsPage />} />
+        <Route
+          path="/hats"
+          element={<HatsPage animate={true} />}
+        />
+
       </Routes>
 
     </div>
