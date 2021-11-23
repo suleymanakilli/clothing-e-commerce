@@ -12,7 +12,11 @@ import SignInAndOut from './pages/signInAndOut/signInAndOut';
 import { auth, createUserProfileDocument } from './firebase/firebase'
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/userActions'
+import { Navigate } from 'react-router-dom';
 function App(props) {
+  useEffect(() => {
+    console.log(props.currentUser)
+  }, [props])
   const { setCurrentUser } = props
   useEffect(() => {
     var unSubscribeFromAuth = null
@@ -40,7 +44,7 @@ function App(props) {
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route exact path="/" element={<HomePage />} />
         <Route
           path="/hats"
           element={<HatsPage />}
@@ -50,8 +54,8 @@ function App(props) {
           element={<ShopPage />}
         />
         <Route
-          path="/signin"
-          element={<SignInAndOut />}
+          exact path="/signin"
+          element={props.currentUser !== null ? <Navigate to="/" /> : <SignInAndOut />}
         />
 
       </Routes>
