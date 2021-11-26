@@ -12,6 +12,8 @@ import SignInAndOut from './pages/signInAndOut/signInAndOut';
 import { auth, createUserProfileDocument } from './firebase/firebase'
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/userActions'
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from './redux/user/userSelectors';
 import { Navigate } from 'react-router-dom';
 function App(props) {
   useEffect(() => {
@@ -63,8 +65,8 @@ function App(props) {
     </div>
   );
 }
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -6,6 +6,11 @@ import CartDropdown from '../cartDropdown/cartDropdown';
 import { useNavigate } from "react-router-dom";
 import { auth } from '../../firebase/firebase';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect'
+import { selectCartHidden } from '../../redux/cart/cartSelectors'
+import { selectCurrentUser } from '../../redux/user/userSelectors'
+
+
 function Header({ currentUser, hidden }) {
 
     let navigate = useNavigate();
@@ -29,8 +34,9 @@ function Header({ currentUser, hidden }) {
         </div>
     )
 }
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-    currentUser, hidden
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
 
 });
 
