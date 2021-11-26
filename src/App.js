@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 import './App.css';
 import HomePage from './pages/homePage/homePage';
-import HatsPage from './pages/hatsPage/hatsPage';
 import ShopPage from './pages/shopPage/shopPage';
 import Header from './components/header/header';
 import SignInAndOut from './pages/signInAndOut/signInAndOut';
@@ -15,6 +14,7 @@ import { setCurrentUser } from './redux/user/userActions'
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/userSelectors';
 import { Navigate } from 'react-router-dom';
+import CheckoutPage from './pages/checkoutPage/checkoutPage';
 function App(props) {
   useEffect(() => {
     console.log(props.currentUser)
@@ -48,16 +48,16 @@ function App(props) {
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route
-          path="/hats"
-          element={<HatsPage />}
-        />
-        <Route
           path="/shop"
           element={<ShopPage />}
         />
         <Route
           exact path="/signin"
           element={props.currentUser !== null ? <Navigate to="/" /> : <SignInAndOut />}
+        />
+        <Route
+          exact path="/checkout"
+          element={<CheckoutPage />}
         />
 
       </Routes>
