@@ -1,4 +1,4 @@
-import SHOP_DATA from "../../pages/shopPage/shopData"
+import SHOP_DATA from "./shopData"
 
 const INITIAL_STATE = {
     collections: SHOP_DATA

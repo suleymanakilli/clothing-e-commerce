@@ -48,7 +48,7 @@ function App(props) {
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route
-          path="/shop"
+          path="/shop/*"
           element={<ShopPage />}
         />
         <Route
