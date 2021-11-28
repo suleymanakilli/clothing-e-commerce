@@ -16,13 +16,9 @@ import { selectCurrentUser } from './redux/user/userSelectors';
 import { Navigate } from 'react-router-dom';
 import CheckoutPage from './pages/checkoutPage/checkoutPage';
 function App(props) {
-  useEffect(() => {
-    console.log(props.currentUser)
-  }, [props])
   const { setCurrentUser } = props
   useEffect(() => {
     var unSubscribeFromAuth = null
-
     unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth)
