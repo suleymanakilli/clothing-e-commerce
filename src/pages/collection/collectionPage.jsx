@@ -1,19 +1,11 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router';
+import React from 'react'
 import { connect } from 'react-redux';
 import { selectCollection } from '../../redux/shop/shopSelector';
 import CollectionItem from '../../components/collectionItem/collectionItem'
 import './collectionPage.scss'
 
 
-var collectionId;
 function CollectionPage({ collection }) {
-
-    console.log(collection)
-    let params = useParams();
-    useEffect(() => {
-        collectionId = params.collectionId
-    }, [params.collectionId])
     return (
         <div className="collection-page">
             <h2 className="title">{collection?.title}</h2>
@@ -27,6 +19,6 @@ function CollectionPage({ collection }) {
 }
 
 const mapStateToProps = (state) => ({
-    collection: selectCollection(collectionId)(state)
+    collection: selectCollection(window.location.pathname.slice(6))(state)
 })
 export default connect(mapStateToProps)(CollectionPage)

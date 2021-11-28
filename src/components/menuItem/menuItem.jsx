@@ -1,24 +1,23 @@
 import React from 'react';
-import { 
+import {
     useNavigate,
     //Link 
-    } from "react-router-dom";
+} from "react-router-dom";
 import './menuItem.scss';
 
-function MenuItem({ title, imageUrl, size }) {
+function MenuItem({ title, imageUrl, size, linkUrl }) {
     let navigate = useNavigate();
     return (
-        <div className={size ? `large menu-item` : 'menu-item'}>
+        <div className={size ? `large menu-item` : 'menu-item'} onClick={() => navigate(linkUrl, { state: { stateStatus: "State çalıştı" } })}>
             <div
                 className='background-image'
                 style={{
                     backgroundImage: `url(${imageUrl})`
                 }}
             />
-            <div className='content'>
+            <div className='content' >
                 <h1 className='title'>{title.toUpperCase()}</h1>
-                {/*<Link to='/hats' params={{ prevpath: window.location.pathname }} >Deneme</Link>*/}
-                <span className='subtitle' onClick={() => navigate("hats", { state: {stateStatus:"State çalıştı"}})}>SHOP NOW</span>
+                <span className='subtitle' >SHOP NOW</span>
             </div>
         </div >
     )
