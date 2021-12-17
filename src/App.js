@@ -7,7 +7,6 @@ import './App.css';
 import HomePage from './pages/homePage/homePage';
 import ShopPage from './pages/shopPage/shopPage';
 import Header from './components/header/header';
-import SignInAndOut from './pages/signInAndOut/signInAndOut';
 import { auth, createUserProfileDocument } from './firebase/firebase'
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/userActions'
@@ -15,6 +14,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/userSelectors';
 import { Navigate } from 'react-router-dom';
 import CheckoutPage from './pages/checkoutPage/checkoutPage';
+import SignInAndUp from './pages/signInAndUp/signInAndUp';
 function App(props) {
   const { setCurrentUser } = props
   useEffect(() => {
@@ -49,7 +49,7 @@ function App(props) {
         />
         <Route
           exact path="/signin"
-          element={props.currentUser !== null ? <Navigate to="/" /> : <SignInAndOut />}
+          element={props.currentUser !== null ? <Navigate to="/" /> : <SignInAndUp />}
         />
         <Route
           exact path="/checkout"
