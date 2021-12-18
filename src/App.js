@@ -15,6 +15,7 @@ import { selectCurrentUser } from './redux/user/userSelectors';
 import { Navigate } from 'react-router-dom';
 import CheckoutPage from './pages/checkoutPage/checkoutPage';
 import SignInAndUp from './pages/signInAndUp/signInAndUp';
+
 function App(props) {
   const { setCurrentUser } = props
   useEffect(() => {
@@ -36,7 +37,6 @@ function App(props) {
     })
     return () => unSubscribeFromAuth()
   }, [setCurrentUser])
-
 
   return (
     <div>
