@@ -17,7 +17,7 @@ function CheckoutItem({ cartItem, clearItem, addItem, removeItem }) {
                 <span >{quantity}</span>
                 <div onClick={() => addItem(cartItem)}>&#10095;</div>
             </QuantityContainer>
-            <TextContainer >{price}</TextContainer>
+            <TextContainer >{price * quantity}</TextContainer>
             <RemoveButtonContainer onClick={() => clearItem(cartItem)}>&#10005;</RemoveButtonContainer >
         </CheckoutItemContainer>
     )
