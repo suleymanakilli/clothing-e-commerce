@@ -24,7 +24,9 @@ const ShopPage = ({ updateCollections, isCollectionsLoaded, ...otherProps }) => 
                     collections eğer null ise !!null false döndürecek. Ama eğer collection null ise spinnerın çalışmasını istiyoruz.
                     Spinner ise sadece isLoading true olduğunda çalışacak
                     */
-                /*Container Pattern kullanma sebebimiz isLoading gibi işlemlerin shop page içinde yapılmamasını olabildiğince buranın sade kalmasını istememizden */
+                /*Container Pattern kullanma sebebimiz isLoading gibi işlemlerin 
+                buradaki mapstatetoprops kısmını çokça doldurması ve biz shop page
+                 içinde yapılmamasını olabildiğince buranın sade kalmasını istememizden */
                 />
                 <Route path={`:collectionId`} element={<CollectionPageContainer />} />
 
