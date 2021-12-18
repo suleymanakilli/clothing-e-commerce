@@ -21,3 +21,10 @@ export const selectIsCollectionFetching = createSelector(
     [selectShop],
     shop => shop.isFetching
 )
+
+export const selectIsCollectionsLoaded = createSelector(
+    [selectShop],
+    shop => !!shop.collections
+    //!! dememizin sebebi değerleri true veya false'a çevirmek için.
+    //Örn: !!0 false   !!null false    !!{} true
+)

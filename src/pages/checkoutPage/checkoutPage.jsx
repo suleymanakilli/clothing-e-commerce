@@ -37,6 +37,12 @@ function CheckoutPage({ cartItems, total }) {
         </CheckoutPageContainer>
     )
 }
+/*const mapStateToProps = state => ({
+    cartItems: cartItems(state),
+    total:selectCartTotal(state)
+})
+yerine createStructuredSelector kullanıyoruz.
+*/
 const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems,
     total: selectCartTotal

@@ -4,19 +4,12 @@ import {
     Route
 } from "react-router-dom";
 import { connect } from 'react-redux';
-import CollectionsOverview from '../../components/collectionOverview/collectionsOverview'
-import CollectionPage from '../collection/collectionPage'
-import WithSpinner from '../../components/withSpinner/withSpinner';
-
-import { createStructuredSelector } from 'reselect';
+import CollectionsOverviewContainer from '../../components/collectionOverview/collectionsOverviewContainer';
+import CollectionPageContainer from '../collection/collectionPageContainer';
 import { fetchCollectionsStartAsync } from '../../redux/shop/shopActions';
-import { selectIsCollectionFetching } from '../../redux/shop/shopSelector';
 
-const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview)
-const CollectionPageWithSpinner = WithSpinner(CollectionPage)
 
-const ShopPage = ({ updateCollections, ...otherProps }) => {
-    const { isCollectionFetching } = otherProps
+const ShopPage = ({ updateCollections, isCollectionsLoaded, ...otherProps }) => {
     useEffect(() => {
         const { fetchCollectionsStartAsync } = otherProps
         fetchCollectionsStartAsync()
@@ -27,25 +20,21 @@ const ShopPage = ({ updateCollections, ...otherProps }) => {
             <Routes>
                 <Route
                     exact path={`/`}
-                    element={<CollectionsOverviewWithSpinner isLoading={isCollectionFetching} {...otherProps} />}
+                    element={<CollectionsOverviewContainer />}/*Başına ünlem koymamızın sebebi
+                    collections eğer null ise !!null false döndürecek. Ama eğer collection null ise spinnerın çalışmasını istiyoruz.
+                    Spinner ise sadece isLoading true olduğunda çalışacak
+                    */
+                /*Container Pattern kullanma sebebimiz isLoading gibi işlemlerin shop page içinde yapılmamasını olabildiğince buranın sade kalmasını istememizden */
                 />
-                <Route path={`:collectionId`} element={<CollectionPageWithSpinner isLoading={isCollectionFetching} {...otherProps} />} />
+                <Route path={`:collectionId`} element={<CollectionPageContainer />} />
 
             </Routes>
         </div>
     )
 }
 
-/*const mapStateToProps = state => ({
-    isCollectionFetching: selectIsCollectionFetching(state)
-})
-yerine createStructuredSelector kullanıyoruz.
-*/
-const mapStateToProps = createStructuredSelector({
-    isCollectionFetching: selectIsCollectionFetching
-})
 const mapDispatchToProps = (dispatch) => ({
     fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
+export default connect(null, mapDispatchToProps)(ShopPage);

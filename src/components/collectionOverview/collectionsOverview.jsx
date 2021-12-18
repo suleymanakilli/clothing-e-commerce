@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { selectCollectionsAsArray } from '../../redux/shop/shopSelector'
 import CollectionPreview from '../collectionPreview/collectionPreview'
 import { CollectionsOverviewContainer } from './collectionsOverviewStyle'
-function CollectionsOverview({ collections }) {
+function CollectionsOverview({ collections, ...otherProps }) {
     return (
         <CollectionsOverviewContainer>
             {collections.map(({ id, ...otherCollectionProps }) => (
