@@ -6,7 +6,11 @@ import CollectionPage from './collectionPage'
 import { compose } from 'redux'
 
 const mapStateToProps = createStructuredSelector({
-    isLoading: selectIsCollectionsLoaded
+    isLoading: state => !selectIsCollectionsLoaded(state)
+    /*Başına ünlem koymamızın sebebi
+                    collections eğer null ise !!null false döndürecek. Ama eğer collection null ise spinnerın çalışmasını istiyoruz.
+                    Spinner ise sadece isLoading true olduğunda çalışacak
+                    */
 })
 
 
