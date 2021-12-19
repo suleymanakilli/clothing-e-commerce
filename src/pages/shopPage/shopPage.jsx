@@ -6,13 +6,12 @@ import {
 import { connect } from 'react-redux';
 import CollectionsOverviewContainer from '../../components/collectionOverview/collectionsOverviewContainer';
 import CollectionPageContainer from '../collection/collectionPageContainer';
-import { fetchCollectionsStartAsync } from '../../redux/shop/shopActions';
+import { fetchCollectionsStart } from '../../redux/shop/shopActions';
 
 
-const ShopPage = ({ updateCollections, isCollectionsLoaded, ...otherProps }) => {
+const ShopPage = ({ fetchCollectionsStart }) => {
     useEffect(() => {
-        const { fetchCollectionsStartAsync } = otherProps
-        fetchCollectionsStartAsync()
+        fetchCollectionsStart()
         // eslint-disable-next-line
     }, [])
     return (
@@ -33,7 +32,7 @@ const ShopPage = ({ updateCollections, isCollectionsLoaded, ...otherProps }) => 
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
+    fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 });
 
 export default connect(null, mapDispatchToProps)(ShopPage);

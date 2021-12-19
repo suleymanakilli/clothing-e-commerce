@@ -7,36 +7,17 @@ import './App.css';
 import HomePage from './pages/homePage/homePage';
 import ShopPage from './pages/shopPage/shopPage';
 import Header from './components/header/header';
-import { auth, createUserProfileDocument } from './firebase/firebase'
 import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/user/userActions'
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/userSelectors';
 import { Navigate } from 'react-router-dom';
 import CheckoutPage from './pages/checkoutPage/checkoutPage';
 import SignInAndUp from './pages/signInAndUp/signInAndUp';
-
-function App(props) {
-  const { setCurrentUser } = props
+import { checkUserSession } from './redux/user/userActions'
+function App({ checkUserSession, ...otherProps }) {
   useEffect(() => {
-    var unSubscribeFromAuth = null
-    unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth)
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          })
-        })
-      }
-      else {
-        setCurrentUser(userAuth)
-      }
-
-    })
-    return () => unSubscribeFromAuth()
-  }, [setCurrentUser])
+    checkUserSession()
+  }, [checkUserSession])
 
   return (
     <div>
@@ -49,7 +30,7 @@ function App(props) {
         />
         <Route
           exact path="/signin"
-          element={props.currentUser !== null ? <Navigate to="/" /> : <SignInAndUp />}
+          element={otherProps.currentUser !== null ? <Navigate to="/" /> : <SignInAndUp />}
         />
         <Route
           exact path="/checkout"
@@ -66,7 +47,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  checkUserSession: () => dispatch(checkUserSession())
 });
 
 export default connect(
