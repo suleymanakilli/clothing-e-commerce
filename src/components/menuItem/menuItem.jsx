@@ -7,7 +7,7 @@ import { BackgroundImageContainer, ContentContainer, ContentSubtitle, ContentTit
 function MenuItem({ title, imageUrl, size, linkUrl }) {
     let navigate = useNavigate();
     return (
-        <MenuItemContainer onClick={() => navigate(linkUrl, { state: { stateStatus: "State çalıştı" } })}>
+        <MenuItemContainer size={size} onClick={() => navigate(linkUrl, { state: { stateStatus: "State çalıştı" } })}>
             <BackgroundImageContainer
                 className='background-image'
                 style={{

@@ -3,7 +3,6 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import './App.css';
 import HomePage from './pages/homePage/homePage';
 import ShopPage from './pages/shopPage/shopPage';
 import Header from './components/header/header';
@@ -14,6 +13,8 @@ import { Navigate } from 'react-router-dom';
 import CheckoutPage from './pages/checkoutPage/checkoutPage';
 import SignInAndUp from './pages/signInAndUp/signInAndUp';
 import { checkUserSession } from './redux/user/userActions'
+import { GlobalStyle } from './globalStyles'
+import ContactPage from './pages/contactPage/contactPage';
 function App({ checkUserSession, ...otherProps }) {
   useEffect(() => {
     checkUserSession()
@@ -21,6 +22,7 @@ function App({ checkUserSession, ...otherProps }) {
 
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <Routes>
         <Route exact path="/" element={<HomePage />} />
@@ -35,6 +37,10 @@ function App({ checkUserSession, ...otherProps }) {
         <Route
           exact path="/checkout"
           element={<CheckoutPage />}
+        />
+        <Route
+          exact path="/contact"
+          element={<ContactPage />}
         />
 
       </Routes>
