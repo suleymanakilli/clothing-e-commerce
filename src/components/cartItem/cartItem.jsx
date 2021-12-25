@@ -1,6 +1,6 @@
 import React from 'react'
 import { CartItemContainer, CartItemImage, ItemDetailsContainer } from './cartItemStyle'
-export default function CartItem({ item: { imageUrl, price, name, quantity } }) {
+function CartItem({ item: { imageUrl, price, name, quantity } }) {
     return (
         <CartItemContainer>
             <CartItemImage src={imageUrl} alt="item" />
@@ -11,3 +11,4 @@ export default function CartItem({ item: { imageUrl, price, name, quantity } }) 
         </CartItemContainer>
     )
 }
+export default React.memo(CartItem)
