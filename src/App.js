@@ -11,8 +11,10 @@ import { Navigate } from 'react-router-dom';
 import { checkUserSession } from './redux/user/userActions'
 import { GlobalStyle } from './globalStyles'
 import Spinner from './components/spinner/spinner';
+import ErrorBoundary from './components/errorBoundary/errorBoundary';
 
-const HomePage = lazy(() => import('./pages/homePage/homePage.jsx'))
+
+const HomePage = lazy(() => import('./pages/homePage/homePage'))
 const ShopPage = lazy(() => import('./pages/shopPage/shopPage'))
 const CheckoutPage = lazy(() => import('./pages/checkoutPage/checkoutPage'))
 const SignInAndUpPage = lazy(() => import('./pages/signInAndUpPage/signInAndUpPage'))
@@ -28,27 +30,30 @@ function App({ checkUserSession, ...otherProps }) {
     <div>
       <GlobalStyle />
       <Header />
-      <Suspense fallback={<Spinner />}>
-        <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route
-            path="/shop/*"
-            element={<ShopPage />}
-          />
-          <Route
-            exact path="/signin"
-            element={otherProps.currentUser !== null ? <Navigate to="/" /> : <SignInAndUpPage />}
-          />
-          <Route
-            exact path="/checkout"
-            element={<CheckoutPage />}
-          />
-          <Route
-            exact path="/contact"
-            element={<ContactPage />}
-          />
-        </Routes>
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route exact path="/" element={<HomePage />} />
+            <Route
+              path="/shop/*"
+              element={<ShopPage />}
+            />
+            <Route
+              exact path="/signin"
+              element={otherProps.currentUser !== null ? <Navigate to="/" /> : <SignInAndUpPage />}
+            />
+            <Route
+              exact path="/checkout"
+              element={<CheckoutPage />}
+            />
+            <Route
+              exact path="/contact"
+              element={<ContactPage />}
+            />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
+
     </div>
   );
 }
